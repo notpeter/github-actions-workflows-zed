@@ -1,0 +1,17 @@
+[package]
+name = "github-actions-workflows"
+version = "0.2.0"
+edition = "2021"
+publish = false
+
+[lib]
+path = "src/github_actions_workflows.rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+zed_extension_api = "0.7.0"
+
+[profile.release]
+opt-level = "s"
+lto = true
+strip = true

@@ -55,8 +55,7 @@
       (block_node
         (block_scalar) @injection.content)
     ]
-    (#set! injection.language "python")
-    (#set! injection.priority "110")))
+    (#set! injection.language "python")))
 
 ; PowerShell (pwsh and powershell)
 (block_mapping
@@ -75,8 +74,7 @@
       (block_node
         (block_scalar) @injection.content)
     ]
-    (#set! injection.language "powershell")
-    (#set! injection.priority "110")))
+    (#set! injection.language "powershell")))
 
 ; Nushell
 (block_mapping
@@ -95,8 +93,7 @@
       (block_node
         (block_scalar) @injection.content)
     ]
-    (#set! injection.language "nu")
-    (#set! injection.priority "110")))
+    (#set! injection.language "nu")))
 
 ; Fish
 (block_mapping
@@ -115,8 +112,7 @@
       (block_node
         (block_scalar) @injection.content)
     ]
-    (#set! injection.language "fish")
-    (#set! injection.priority "110")))
+    (#set! injection.language "fish")))
 
 ; GitHub actions: JavaScript for workflow scripting (inline and block)
 (block_mapping

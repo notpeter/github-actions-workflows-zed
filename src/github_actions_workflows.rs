@@ -127,6 +127,10 @@ impl zed::Extension for GithubActionsExtension {
                 ],
                 "https://json.schemastore.org/github-release-config.json": [
                     ".github/release.yml"
+                ],
+                "https://json.schemastore.org/dependabot-2.0.json": [
+                    ".github/dependabot.yml",
+                    ".github/dependabot.yaml"
                 ]
             },
             "validate": true,
@@ -136,7 +140,7 @@ impl zed::Extension for GithubActionsExtension {
         });
 
         if let Ok(lsp_settings) =
-            LspSettings::for_worktree("github-workflows-yaml", worktree)
+            LspSettings::for_worktree("github-yaml-language-server", worktree)
         {
             if let Some(user_settings) = lsp_settings.settings {
                 if let Some(user_yaml) =

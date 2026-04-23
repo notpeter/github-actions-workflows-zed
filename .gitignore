@@ -1,3 +1,4 @@
 grammars/
 target/
 Cargo.lock
+*.wasm

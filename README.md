@@ -7,9 +7,10 @@
 ## Features
 
 - "GitHub YAML" language:
-  - [tree-sitter-yaml](https://github.com/zed-industries/tree-sitter-yaml)
+  - [zed-industries/tree-sitter-yaml](https://github.com/zed-industries/tree-sitter-yaml): identical to Zed YAML language
   - injection of [rmuir/tree-sitter-ghactions](https://github.com/rmuir/tree-sitter-ghactions) for `${{ }}` blocks
-  - injection of [tree-sitter-bash](https://github.com/tree-sitter/tree-sitter-bash) for `run:`
+  - injection of [tree-sitter-bash](https://github.com/tree-sitter/tree-sitter-bash) for `run:` blocks
+  - injection of [tree-sitter-javascript](https://github.com/tree-sitter/tree-sitter-javascript) for [actions/github-script](https://github.com/actions/github-script) `script:` blocks
 - JSON Schema registration with yaml-language-server supporting Auto-complete / Validation / Hover docs:
   - [GitHub Workflows](https://json.schemastore.org/github-workflow.json): `.github/workflows/*.{yml,yaml}`, `workflow-templates/*.yml`
   - [GitHub Actions](https://json.schemastore.org/github-action.json): `.github/actions/**/action.{yml,yaml}`

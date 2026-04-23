@@ -30,6 +30,7 @@
 "*" @punctuation.special
 
 (number) @number
+
 (identifier) @variable
 
 ; https://docs.github.com/en/actions/reference/workflows-and-actions/contexts
@@ -60,4 +61,5 @@
 (null) @constant.builtin
 
 (string) @string
+
 (escape) @string.escape

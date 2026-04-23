@@ -1,4 +1,4 @@
-name = "GitHub Workflows"
+name = "GitHub YAML"
 grammar = "yaml"
 line_comments = ["# "]
 autoclose_before = ",]}"

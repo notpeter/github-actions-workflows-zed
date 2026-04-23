@@ -11,8 +11,8 @@ repository = "https://github.com/rmuir/tree-sitter-ghactions"
 commit = "1af70d96c09dbfc1a6eeeef15c4f4373b4d38a79"
 
 [language_servers.github-workflows-yaml]
-name = "GitHub Workflows YAML"
-language = "GitHub Workflows"
+name = "GitHub YAML"
+language = "GitHub YAML"
 
 [language_servers.github-workflows-yaml.language_ids]
-"GitHub Workflows" = "yaml"
+"GitHub YAML" = "yaml"

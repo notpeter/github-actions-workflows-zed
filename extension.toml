@@ -1,6 +1,6 @@
 id = "github-actions-workflows"
 name = "GitHub Workflows"
-version = "0.1.0"
+version = "0.2.0"
 schema_version = 1
 authors = ["Peter Tripp <petertripp@gmail.com>"]
 description = "GitHub Actions workflow language support (check readme.md for instructions)"
@@ -9,3 +9,10 @@ repository = "https://github.com/notpeter/github-actions-workflows-zed"
 [grammars.ghactions]
 repository = "https://github.com/rmuir/tree-sitter-ghactions"
 commit = "1af70d96c09dbfc1a6eeeef15c4f4373b4d38a79"
+
+[language_servers.yaml-language-server]
+name = "YAML Language Server"
+language = "GitHub Workflows"
+
+[language_servers.yaml-language-server.language_ids]
+"GitHub Workflows" = "yaml"

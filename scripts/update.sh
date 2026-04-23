@@ -4,6 +4,7 @@
 #   github_yaml       <- zed-industries/zed (generic YAML queries)
 #   ghactions         <- rmuir/tree-sitter-ghactions
 #   nim_format_string <- neovim-treesitter/nvim-treesitter-queries-nim_format_string
+#   codeowners        <- lukasmalkmus/tree-sitter-codeowners
 #
 # Extension-specific files (injections.scm for github_yaml, config.toml
 # everywhere) are not synced. See the "Skipped" list at the end.
@@ -63,6 +64,13 @@ curl -fsSL "${NIM_BASE}/highlights.scm" \
         -e 's| @none||g' \
   > "${NIM_DEST}/highlights.scm"
 
+# --- codeowners --------------------------------------------------------------
+CODEOWNERS_BASE="https://raw.githubusercontent.com/lukasmalkmus/tree-sitter-codeowners/main/queries"
+CODEOWNERS_DEST="${ROOT}/languages/codeowners"
+echo "Syncing codeowners from ${CODEOWNERS_BASE}"
+echo "  -> highlights.scm"
+curl -fsSL "${CODEOWNERS_BASE}/highlights.scm" -o "${CODEOWNERS_DEST}/highlights.scm"
+
 echo "Formatting files..."
 ts_query_ls format languages/*/*.scm
 
@@ -73,3 +81,4 @@ echo "  - languages/github_yaml/config.toml     (language name, indent rules)"
 echo "  - languages/ghactions/config.toml       (hidden-language config)"
 echo "  - languages/nim_format_string/injections.scm  (upstream injects nim; N/A here)"
 echo "  - languages/nim_format_string/config.toml     (hidden-language config)"
+echo "  - languages/codeowners/config.toml      (language name, path_suffixes)"

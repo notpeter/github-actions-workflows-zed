@@ -127,6 +127,9 @@ impl zed::Extension for GithubActionsExtension {
                 "https://json.schemastore.org/dependabot-2.0.json": [
                     ".github/dependabot.yml",
                     ".github/dependabot.yaml"
+                ],
+                "https://raw.githubusercontent.com/citation-file-format/citation-file-format/1.2.0/schema.json": [
+                    "CITATION.cff"
                 ]
             },
             "validate": true,

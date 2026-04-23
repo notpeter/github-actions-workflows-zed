@@ -110,6 +110,22 @@ impl zed::Extension for GithubActionsExtension {
                 "https://json.schemastore.org/github-action.json": [
                     ".github/actions/**/action.yml",
                     ".github/actions/**/action.yaml"
+                ],
+                "https://json.schemastore.org/github-funding.json": [
+                    ".github/FUNDING.yml"
+                ],
+                "https://json.schemastore.org/github-discussion.json": [
+                    ".github/DISCUSSION_TEMPLATE/*.yml"
+                ],
+                "https://json.schemastore.org/github-issue-forms.json": [
+                    "!.github/ISSUE_TEMPLATE/config.yml",
+                    ".github/ISSUE_TEMPLATE/*.yml"
+                ],
+                "https://json.schemastore.org/github-issue-config.json": [
+                    ".github/ISSUE_TEMPLATE/config.yml"
+                ],
+                "https://json.schemastore.org/github-release-config.json": [
+                    ".github/release.yml"
                 ]
             },
             "validate": true,

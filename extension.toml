@@ -10,9 +10,9 @@ repository = "https://github.com/notpeter/github-actions-workflows-zed"
 repository = "https://github.com/rmuir/tree-sitter-ghactions"
 commit = "1af70d96c09dbfc1a6eeeef15c4f4373b4d38a79"
 
-[language_servers.github-workflows-yaml]
+[language_servers.github-yaml-language-server]
 name = "GitHub YAML"
 language = "GitHub YAML"
 
-[language_servers.github-workflows-yaml.language_ids]
+[language_servers.github-yaml-language-server.language_ids]
 "GitHub YAML" = "yaml"

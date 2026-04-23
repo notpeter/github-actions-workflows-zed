@@ -1,63 +1,49 @@
-[
-  "${{"
-  "}}"
-] @keyword
+(boolean_scalar) @boolean
+(null_scalar) @constant.builtin
 
 [
-  "&&"
-  "||"
-  "=="
-  "!="
-  "<"
-  "<="
-  ">"
-  ">="
-  "!"
-] @operator
+  (double_quote_scalar)
+  (single_quote_scalar)
+  (block_scalar)
+  (string_scalar)
+] @string
+
+(escape_sequence) @string.escape
 
 [
-  "("
-  ")"
-  "["
-  "]"
+  (integer_scalar)
+  (float_scalar)
+] @number
+
+(comment) @comment
+
+[
+  (anchor_name)
+  (alias_name)
+  (tag)
+] @type
+
+key: (flow_node (plain_scalar (string_scalar) @property))
+
+[
+ ","
+ "-"
+ ":"
+ ">"
+ "?"
+ "|"
+] @punctuation.delimiter
+
+[
+ "["
+ "]"
+ "{"
+ "}"
 ] @punctuation.bracket
 
 [
-  ","
-  "."
-] @punctuation.delimiter
-
-"*" @punctuation.special
-
-(number) @number
-(identifier) @variable
-
-; https://docs.github.com/en/actions/reference/workflows-and-actions/contexts
-(dereference_expression
-  object: (identifier) @module.builtin
-  (#any-of? @module.builtin
-    "github" "env" "vars" "job" "jobs" "steps" "runner" "secrets" "strategy" "matrix" "needs"
-    "inputs"))
-
-(dereference_expression
-  property: (identifier) @property)
-
-(function_call
-  name: (identifier) @function.call)
-
-; https://docs.github.com/en/actions/reference/workflows-and-actions/expressions#functions
-(function_call
-  name: (identifier) @function.builtin
-  (#any-of? @function.builtin
-    "contains" "startsWith" "endsWith" "format" "join" "toJSON" "toJson" "fromJSON" "fromJson"
-    "hashFiles" "success" "always" "cancelled" "failure" "case"))
-
-[
-  (true)
-  (false)
-] @boolean
-
-(null) @constant.builtin
-
-(string) @string
-(escape) @string.escape
+ "*"
+ "&"
+ "---"
+ "..."
+] @punctuation.special

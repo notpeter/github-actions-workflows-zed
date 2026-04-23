@@ -1,17 +1,19 @@
-# GitHub Workflows for Zed
+## GitHub Workflows for Zed
 
 A [Zed](https://zed.dev) extension that adds a `GitHub Workflows` language
-backed by [tree-sitter-ghactions](https://github.com/rmuir/tree-sitter-ghactions),
-a parser for the GitHub Actions expression language (`${{ ... }}`).
+for GitHub Actions workflow files.
 
-## Caveat
+## What it provides
 
-`tree-sitter-ghactions` parses GitHub Actions *expressions*, not the
-surrounding YAML document. Consequently, highlighting from this extension
-applies to the expression language itself — operators, identifiers, context
-accessors (`github`, `env`, `secrets`, ...), and builtin functions
-(`contains`, `fromJSON`, `hashFiles`, ...). YAML keys and scalars outside
-of `${{ ... }}` will not be highlighted by this grammar.
+- A language named **GitHub Workflows** backed by Zed's built-in
+  `tree-sitter-yaml` grammar (no extra YAML grammar is bundled or compiled).
+- Syntax highlighting, bracket matching, outline, and text objects for YAML.
+- Injection of [`tree-sitter-ghactions`](https://github.com/rmuir/tree-sitter-ghactions)
+  inside any YAML string containing a `${{ ... }}` expression, giving rich
+  highlighting of operators, identifiers, context accessors
+  (`github`, `env`, `secrets`, ...), and builtin functions
+  (`contains`, `fromJSON`, `hashFiles`, ...).
+- Injection of `bash` into `run:` step values.
 
 ## Installation
 

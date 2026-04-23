@@ -1,11 +1,10 @@
 name = "GitHub Workflows"
-grammar = "ghactions"
+grammar = "yaml"
 line_comments = ["# "]
-autoclose_before = ",)]}"
+autoclose_before = ",]}"
 brackets = [
 	{ start = "{", end = "}", close = true, newline = true },
 	{ start = "[", end = "]", close = true, newline = true },
-	{ start = "(", end = ")", close = true, newline = true },
 	{ start = "\"", end = "\"", close = true, newline = false, not_in = [
 		"string",
 	] },

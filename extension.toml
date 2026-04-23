@@ -10,6 +10,10 @@ repository = "https://github.com/notpeter/github-yaml-zed"
 repository = "https://github.com/rmuir/tree-sitter-ghactions"
 commit = "1af70d96c09dbfc1a6eeeef15c4f4373b4d38a79"
 
+[grammars.nim_format_string]
+repository = "https://github.com/aMOPel/tree-sitter-nim-format-string"
+commit = "d45f75022d147cda056e98bfba68222c9c8eca3a"
+
 [language_servers.github-yaml-language-server]
 name = "GitHub YAML"
 language = "GitHub YAML"

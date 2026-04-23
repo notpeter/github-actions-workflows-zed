@@ -7,7 +7,7 @@
   (single_quote_scalar)
 ] @injection.content
   (#match? @injection.content "[$][{][{]")
-  (#set! injection.language "GitHub Actions Expression"))
+  (#set! injection.language "ghactions"))
 
 ; Inject bash into `run:` step values.
 (block_mapping_pair

@@ -1,0 +1,3 @@
+name = "nim_format_string"
+grammar = "nim_format_string"
+hidden = true

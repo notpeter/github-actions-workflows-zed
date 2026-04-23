@@ -136,7 +136,7 @@ impl zed::Extension for GithubActionsExtension {
         });
 
         if let Ok(lsp_settings) =
-            LspSettings::for_worktree("yaml-language-server", worktree)
+            LspSettings::for_worktree("github-workflows-yaml", worktree)
         {
             if let Some(user_settings) = lsp_settings.settings {
                 if let Some(user_yaml) =

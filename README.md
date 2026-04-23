@@ -52,15 +52,18 @@ following to your Zed `settings.json`:
 
 ### Customizing the YAML language server
 
-The extension ships with sensible defaults for `yaml-language-server`.
-User settings under `lsp."yaml-language-server".settings.yaml` are deep-merged
-on top of those defaults, so you can add your own schemas or disable features
-without losing the bundled GitHub Actions schemas. For example:
+The extension registers its own `yaml-language-server` instance under
+the LSP name `github-workflows-yaml` (Zed reserves the bare
+`yaml-language-server` name for its built-in YAML adapter). User
+settings under `lsp."github-workflows-yaml".settings.yaml` are
+deep-merged on top of the bundled defaults, so you can add your own
+schemas or disable features without losing the bundled GitHub Actions
+schemas. For example:
 
 ```json
 {
   "lsp": {
-    "yaml-language-server": {
+    "github-workflows-yaml": {
       "settings": {
         "yaml": {
           "schemas": {

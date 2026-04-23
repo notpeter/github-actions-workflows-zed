@@ -105,7 +105,8 @@ impl zed::Extension for GithubActionsExtension {
             "schemas": {
                 "https://json.schemastore.org/github-workflow.json": [
                     ".github/workflows/*.yml",
-                    ".github/workflows/*.yaml"
+                    ".github/workflows/*.yaml",
+                    "workflow-templates/*.yml"
                 ],
                 "https://json.schemastore.org/github-action.json": [
                     ".github/actions/**/action.yml",

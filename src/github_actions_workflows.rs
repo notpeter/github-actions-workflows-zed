@@ -109,9 +109,7 @@ impl zed::Extension for GithubActionsExtension {
                 ],
                 "https://json.schemastore.org/github-action.json": [
                     ".github/actions/**/action.yml",
-                    ".github/actions/**/action.yaml",
-                    "action.yml",
-                    "action.yaml"
+                    ".github/actions/**/action.yaml"
                 ]
             },
             "validate": true,

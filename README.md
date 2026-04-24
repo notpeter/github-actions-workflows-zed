@@ -29,7 +29,7 @@
 
 Open `zed: extensions` from the command palette in Zed and search for `GitHub YAML`,
 
-Or click  this link [zed://extension/git-firefly](zed://extension/git-firefly)
+Or click  this link [zed://extension/github-yaml](zed://extension/github-yaml)
 
 Or clone this repository and using `zed: install dev extension`.
 
@@ -43,11 +43,6 @@ Zed `settings.json` by launching  `zed: open settings file` from the command pal
 
 ```jsonc
 {
-  "languages": {
-    "GitHub Workflow": {
-      "language_servers": ["yaml-language-server"]
-    },
-  },
   "file_types": {
     "GitHub Workflow": [
       "**/.github/workflows/*.{yml,yaml}",
@@ -96,14 +91,34 @@ E.g. For a GitHub Actions Workflow file, `**/.github/workflows/*.yml` use:
 
 ### yaml-language-server settings
 
-This extension provides schema associations for the Zed built-in `yaml-language-server`.
+The extension registers its own `yaml-language-server` instance under the LSP name `github-yaml-language-server`.
 
 User settings are deep-merged on top of the bundled defaults, so you can add your own
-schemas or disable features without losing the bundled GitHub YAML schemas.
+schemas or disable features without losing the bundled GitHub Actions schemas.
+
+For example:
+```json
+{
+  "lsp": {
+    "github-yaml-language-server": {
+      "settings": {
+        "yaml": {
+          "schemas": {
+            "https://json.schemastore.org/whatever.json": [
+              "whatever/*.yml",
+            ]
+          },
+          "format": { "enable": true }
+        }
+      }
+    }
+  }
+}
+```
 
 See [Zed YAML Language Docs](https://zed.dev/docs/languages/yaml) and
 [yaml-language-server settings docs](https://github.com/redhat-developer/yaml-language-server?tab=readme-ov-file#language-server-settings)
-for supported settings and details.
+for supported settings.
 
 ## License
 

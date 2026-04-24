@@ -148,6 +148,18 @@ impl zed::Extension for GithubActionsExtension {
                 "https://raw.githubusercontent.com/CircleCI-Public/circleci-yaml-language-server/refs/heads/main/schema.json": [
                     ".circleci/config.yml",
                     ".circleci/config.yaml"
+                ],
+                "https://render.com/schema/render.yaml.json": [
+                    "render.yml",
+                    "render.yaml"
+                ],
+                "https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json": [
+                    "azure-pipelines.yml",
+                    "azure-pipelines.yaml",
+                    ".azure-pipelines.yml",
+                    ".azure-pipelines.yaml",
+                    ".azure-pipelines/**/*.yml",
+                    ".azure-pipelines/**/*.yaml"
                 ]
             },
             "validate": true,

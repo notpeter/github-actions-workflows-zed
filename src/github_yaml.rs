@@ -94,9 +94,14 @@ impl zed::Extension for GithubActionsExtension {
 
     fn language_server_workspace_configuration(
         &mut self,
-        _language_server_id: &zed::LanguageServerId,
+        language_server_id: &zed::LanguageServerId,
         worktree: &zed::Worktree,
     ) -> Result<Option<serde_json::Value>> {
+        let lsp_name = language_server_id.as_ref();
+        if lsp_name != "github-yaml-language-server" && lsp_name != "yaml-language-server" {
+            return Ok(None);
+        }
+
         let mut yaml_settings = serde_json::json!({
             "schemas": {
                 "https://json.schemastore.org/github-workflow.json": [
@@ -138,8 +143,7 @@ impl zed::Extension for GithubActionsExtension {
             "format": { "enable": false }
         });
 
-        if let Ok(lsp_settings) = LspSettings::for_worktree("github-yaml-language-server", worktree)
-        {
+        if let Ok(lsp_settings) = LspSettings::for_worktree(lsp_name, worktree) {
             if let Some(user_settings) = lsp_settings.settings {
                 if let Some(user_yaml) = user_settings.get("yaml").cloned() {
                     merge(&mut yaml_settings, user_yaml);

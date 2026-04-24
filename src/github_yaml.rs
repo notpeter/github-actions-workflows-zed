@@ -134,6 +134,20 @@ impl zed::Extension for GithubActionsExtension {
                 ],
                 "https://raw.githubusercontent.com/citation-file-format/citation-file-format/1.2.0/schema.json": [
                     "CITATION.cff"
+                ],
+                "https://gitlab.com/gitlab-org/gitlab-foss/-/raw/master/app/assets/javascripts/editor/schema/ci.json": [
+                    ".gitlab-ci.yml",
+                    ".gitlab-ci.yaml",
+                    "*.gitlab-ci.yml",
+                    "*.gitlab-ci.yaml"
+                ],
+                "https://json.schemastore.org/pre-commit-config.json": [
+                    ".pre-commit-config.yml",
+                    ".pre-commit-config.yaml"
+                ],
+                "https://raw.githubusercontent.com/CircleCI-Public/circleci-yaml-language-server/refs/heads/main/schema.json": [
+                    ".circleci/config.yml",
+                    ".circleci/config.yaml"
                 ]
             },
             "validate": true,

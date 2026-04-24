@@ -26,9 +26,14 @@
   - [Citation File Format](https://github.com/citation-file-format/citation-file-format): `CITATION.cff`
   - [GitLab CI](https://gitlab.com/gitlab-org/gitlab-foss/-/raw/master/app/assets/javascripts/editor/schema/ci.json): `.gitlab-ci.{yml,yaml}`, `*.gitlab-ci.{yml,yaml}`
   - [pre-commit-config](https://json.schemastore.org/pre-commit-config.json): `.pre-commit-config.{yml,yaml}`
+  - [pre-commit-hooks](https://json.schemastore.org/pre-commit-hooks.json): `.pre-commit-hooks.{yml,yaml}`
   - [CircleCI](https://raw.githubusercontent.com/CircleCI-Public/circleci-yaml-language-server/refs/heads/main/schema.json): `.circleci/config.{yml,yaml}`
   - [Render](https://render.com/schema/render.yaml.json): `render.{yml,yaml}`
   - [Azure Pipelines](https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json): `azure-pipelines.{yml,yaml}`, `.azure-pipelines.{yml,yaml}`, `.azure-pipelines/**/*.{yml,yaml}`
+  - [Buildkite](https://raw.githubusercontent.com/buildkite/pipeline-schema/main/schema.json): `buildkite.{yml,yaml,json}`, `buildkite.*.{yml,yaml,json}`, `.buildkite/pipeline.{yml,yaml,json}`, `.buildkite/pipeline.*.{yml,yaml,json}`
+  - [GoReleaser](https://goreleaser.com/static/schema.json): `.goreleaser.{yml,yaml}`
+  - [Vercel](https://openapi.vercel.sh/vercel.json): `vercel.json`
+  - [MkDocs](https://json.schemastore.org/mkdocs-1.6.json): `mkdocs.{yml,yaml}`
   - [Renovate](https://docs.renovatebot.com/renovate-schema.json): `renovate.json`, `.github/renovate.json`, `.gitlab/renovate.json`, `.renovaterc`, `.renovaterc.json`
 
 ## Installation

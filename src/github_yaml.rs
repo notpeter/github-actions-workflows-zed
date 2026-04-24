@@ -145,6 +145,10 @@ impl zed::Extension for GithubActionsExtension {
                     ".pre-commit-config.yml",
                     ".pre-commit-config.yaml"
                 ],
+                "https://json.schemastore.org/pre-commit-hooks.json": [
+                    ".pre-commit-hooks.yml",
+                    ".pre-commit-hooks.yaml"
+                ],
                 "https://raw.githubusercontent.com/CircleCI-Public/circleci-yaml-language-server/refs/heads/main/schema.json": [
                     ".circleci/config.yml",
                     ".circleci/config.yaml"
@@ -160,6 +164,24 @@ impl zed::Extension for GithubActionsExtension {
                     ".azure-pipelines.yaml",
                     ".azure-pipelines/**/*.yml",
                     ".azure-pipelines/**/*.yaml"
+                ],
+                "https://raw.githubusercontent.com/buildkite/pipeline-schema/main/schema.json": [
+                    "buildkite.yml",
+                    "buildkite.yaml",
+                    "buildkite.*.yml",
+                    "buildkite.*.yaml",
+                    ".buildkite/pipeline.yml",
+                    ".buildkite/pipeline.yaml",
+                    ".buildkite/pipeline.*.yml",
+                    ".buildkite/pipeline.*.yaml"
+                ],
+                "https://goreleaser.com/static/schema.json": [
+                    ".goreleaser.yml",
+                    ".goreleaser.yaml"
+                ],
+                "https://json.schemastore.org/mkdocs-1.6.json": [
+                    "mkdocs.yml",
+                    "mkdocs.yaml"
                 ]
             },
             "validate": true,
@@ -202,6 +224,19 @@ impl zed::Extension for GithubActionsExtension {
                             ".renovaterc.json"
                         ],
                         "url": "https://docs.renovatebot.com/renovate-schema.json"
+                    },
+                    {
+                        "fileMatch": [
+                            "buildkite.json",
+                            "buildkite.*.json",
+                            ".buildkite/pipeline.json",
+                            ".buildkite/pipeline.*.json"
+                        ],
+                        "url": "https://raw.githubusercontent.com/buildkite/pipeline-schema/main/schema.json"
+                    },
+                    {
+                        "fileMatch": ["vercel.json"],
+                        "url": "https://openapi.vercel.sh/vercel.json"
                     }
                 ]
             }

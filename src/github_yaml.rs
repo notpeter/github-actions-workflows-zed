@@ -98,109 +98,26 @@ impl zed::Extension for GithubActionsExtension {
         worktree: &zed::Worktree,
     ) -> Result<Option<serde_json::Value>> {
         let lsp_name = language_server_id.as_ref();
-        if lsp_name != "github-yaml-language-server" && lsp_name != "yaml-language-server" {
-            return Ok(None);
-        }
-        let mut yaml_settings = serde_json::json!({
-            "schemas": {
-                "https://json.schemastore.org/github-workflow.json": [
-                    ".github/workflows/*.yml",
-                    ".github/workflows/*.yaml",
-                    "workflow-templates/*.yml"
-                ],
-                "https://json.schemastore.org/github-action.json": [
-                    ".github/actions/**/action.yml",
-                    ".github/actions/**/action.yaml"
-                ],
-                "https://json.schemastore.org/github-funding.json": [
-                    ".github/FUNDING.yml"
-                ],
-                "https://json.schemastore.org/github-discussion.json": [
-                    ".github/DISCUSSION_TEMPLATE/*.yml"
-                ],
-                "https://json.schemastore.org/github-issue-forms.json": [
-                    "!.github/ISSUE_TEMPLATE/config.yml",
-                    ".github/ISSUE_TEMPLATE/*.yml"
-                ],
-                "https://json.schemastore.org/github-issue-config.json": [
-                    ".github/ISSUE_TEMPLATE/config.yml"
-                ],
-                "https://json.schemastore.org/github-release-config.json": [
-                    ".github/release.yml"
-                ],
-                "https://json.schemastore.org/dependabot-2.0.json": [
-                    ".github/dependabot.yml",
-                    ".github/dependabot.yaml"
-                ],
-                "https://raw.githubusercontent.com/citation-file-format/citation-file-format/1.2.0/schema.json": [
-                    "CITATION.cff"
-                ],
-                "https://gitlab.com/gitlab-org/gitlab-foss/-/raw/master/app/assets/javascripts/editor/schema/ci.json": [
-                    ".gitlab-ci.yml",
-                    ".gitlab-ci.yaml",
-                    "*.gitlab-ci.yml",
-                    "*.gitlab-ci.yaml"
-                ],
-                "https://json.schemastore.org/pre-commit-config.json": [
-                    ".pre-commit-config.yml",
-                    ".pre-commit-config.yaml"
-                ],
-                "https://json.schemastore.org/pre-commit-hooks.json": [
-                    ".pre-commit-hooks.yml",
-                    ".pre-commit-hooks.yaml"
-                ],
-                "https://raw.githubusercontent.com/CircleCI-Public/circleci-yaml-language-server/refs/heads/main/schema.json": [
-                    ".circleci/config.yml",
-                    ".circleci/config.yaml"
-                ],
-                "https://render.com/schema/render.yaml.json": [
-                    "render.yml",
-                    "render.yaml"
-                ],
-                "https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json": [
-                    "azure-pipelines.yml",
-                    "azure-pipelines.yaml",
-                    ".azure-pipelines.yml",
-                    ".azure-pipelines.yaml",
-                    ".azure-pipelines/**/*.yml",
-                    ".azure-pipelines/**/*.yaml"
-                ],
-                "https://raw.githubusercontent.com/buildkite/pipeline-schema/main/schema.json": [
-                    "buildkite.yml",
-                    "buildkite.yaml",
-                    "buildkite.*.yml",
-                    "buildkite.*.yaml",
-                    ".buildkite/pipeline.yml",
-                    ".buildkite/pipeline.yaml",
-                    ".buildkite/pipeline.*.yml",
-                    ".buildkite/pipeline.*.yaml"
-                ],
-                "https://goreleaser.com/static/schema.json": [
-                    ".goreleaser.yml",
-                    ".goreleaser.yaml"
-                ],
-                "https://json.schemastore.org/mkdocs-1.6.json": [
-                    "mkdocs.yml",
-                    "mkdocs.yaml"
-                ]
-            },
-            "validate": true,
-            "hover": true,
-            "completion": true,
-            "format": { "enable": false }
-        });
+        let raw = match lsp_name {
+            "github-yaml-language-server" => GITHUB_YAML_LS_CONFIG,
+            "yaml-language-server" => YAML_LS_CONFIG,
+            _ => return Ok(None),
+        };
+        let mut config: serde_json::Value = serde_json::from_str(raw).map_err(|e| e.to_string())?;
 
         if let Ok(lsp_settings) = LspSettings::for_worktree(lsp_name, worktree) {
             if let Some(user_settings) = lsp_settings.settings {
-                if let Some(user_yaml) = user_settings.get("yaml").cloned() {
-                    merge(&mut yaml_settings, user_yaml);
-                } else {
-                    merge(&mut yaml_settings, user_settings);
+                if let Some(yaml_obj) = config.get_mut("yaml") {
+                    if let Some(user_yaml) = user_settings.get("yaml").cloned() {
+                        merge(yaml_obj, user_yaml);
+                    } else {
+                        merge(yaml_obj, user_settings);
+                    }
                 }
             }
         }
 
-        Ok(Some(serde_json::json!({ "yaml": yaml_settings })))
+        Ok(Some(config))
     }
 
     fn language_server_additional_workspace_configuration(
@@ -212,36 +129,14 @@ impl zed::Extension for GithubActionsExtension {
         if target_language_server_id.as_ref() != "json-language-server" {
             return Ok(None);
         }
-        Ok(Some(serde_json::json!({
-            "json": {
-                "schemas": [
-                    {
-                        "fileMatch": [
-                            "renovate.json",
-                            ".github/renovate.json",
-                            ".gitlab/renovate.json",
-                            ".renovaterc",
-                            ".renovaterc.json"
-                        ],
-                        "url": "https://docs.renovatebot.com/renovate-schema.json"
-                    },
-                    {
-                        "fileMatch": [
-                            "buildkite.json",
-                            "buildkite.*.json",
-                            ".buildkite/pipeline.json",
-                            ".buildkite/pipeline.*.json"
-                        ],
-                        "url": "https://raw.githubusercontent.com/buildkite/pipeline-schema/main/schema.json"
-                    },
-                    {
-                        "fileMatch": ["vercel.json"],
-                        "url": "https://openapi.vercel.sh/vercel.json"
-                    }
-                ]
-            }
-        })))
+        let config: serde_json::Value =
+            serde_json::from_str(JSON_LS_CONFIG).map_err(|e| e.to_string())?;
+        Ok(Some(config))
     }
 }
+
+const GITHUB_YAML_LS_CONFIG: &str = include_str!("../schemas/github-yaml-language-server.json");
+const YAML_LS_CONFIG: &str = include_str!("../schemas/yaml-language-server.json");
+const JSON_LS_CONFIG: &str = include_str!("../schemas/json-language-server.json");
 
 zed::register_extension!(GithubActionsExtension);

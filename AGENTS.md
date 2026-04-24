@@ -53,17 +53,11 @@ Builds to a `wasm32-wasip2` cdylib (`extension.wasm`).
 Two jobs:
 
 1. Install and launch `yaml-language-server` via Zed's npm helpers.
-2. Serve workspace configuration via `language_server_workspace_configuration`
-Ships a hardcoded `yaml.schemas` map:
-  - GitHub Workflow
-  - GitHub Action
-  - GitHub Funding
-  - GitHub Discussion Templates
-  - GitHub Issue Forms
-  - GitHub Issue Config
-  - GitHub Release Config
-  - Dependabot Config
-  - Citation File Format.
+2. Serve `language_server_workspace_configuration` by embedding (`include_str!`) the JSON files
+   in `schemas/`
+   - `yaml-language-server` -> `schemas/yaml-language-server.json`
+   - `json-language-server` -> `schemas/json-language-server.json`
+   - `github-yaml-language-server` -> `schemas/github-yaml-language-server.json`
 
 The LSP is registered under the Zed-internal name `github-yaml-language-server` (see `extension.toml`)
 but `language_ids` maps `"GitHub YAML" = "yaml"` so `yaml-language-server` still recognizes the document.

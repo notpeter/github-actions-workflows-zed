@@ -1,0 +1,90 @@
+{
+  "yaml": {
+    "schemas": {
+      "https://json.schemastore.org/github-workflow.json": [
+        ".github/workflows/*.yml",
+        ".github/workflows/*.yaml",
+        "workflow-templates/*.yml"
+      ],
+      "https://json.schemastore.org/github-action.json": [
+        ".github/actions/**/action.yml",
+        ".github/actions/**/action.yaml"
+      ],
+      "https://json.schemastore.org/github-funding.json": [
+        ".github/FUNDING.yml"
+      ],
+      "https://json.schemastore.org/github-discussion.json": [
+        ".github/DISCUSSION_TEMPLATE/*.yml"
+      ],
+      "https://json.schemastore.org/github-issue-forms.json": [
+        "!.github/ISSUE_TEMPLATE/config.yml",
+        ".github/ISSUE_TEMPLATE/*.yml"
+      ],
+      "https://json.schemastore.org/github-issue-config.json": [
+        ".github/ISSUE_TEMPLATE/config.yml"
+      ],
+      "https://json.schemastore.org/github-release-config.json": [
+        ".github/release.yml"
+      ],
+      "https://json.schemastore.org/dependabot-2.0.json": [
+        ".github/dependabot.yml",
+        ".github/dependabot.yaml"
+      ],
+      "https://raw.githubusercontent.com/citation-file-format/citation-file-format/1.2.0/schema.json": [
+        "CITATION.cff"
+      ],
+      "https://gitlab.com/gitlab-org/gitlab-foss/-/raw/master/app/assets/javascripts/editor/schema/ci.json": [
+        ".gitlab-ci.yml",
+        ".gitlab-ci.yaml",
+        "*.gitlab-ci.yml",
+        "*.gitlab-ci.yaml"
+      ],
+      "https://json.schemastore.org/pre-commit-config.json": [
+        ".pre-commit-config.yml",
+        ".pre-commit-config.yaml"
+      ],
+      "https://json.schemastore.org/pre-commit-hooks.json": [
+        ".pre-commit-hooks.yml",
+        ".pre-commit-hooks.yaml"
+      ],
+      "https://raw.githubusercontent.com/CircleCI-Public/circleci-yaml-language-server/refs/heads/main/schema.json": [
+        ".circleci/config.yml",
+        ".circleci/config.yaml"
+      ],
+      "https://render.com/schema/render.yaml.json": [
+        "render.yml",
+        "render.yaml"
+      ],
+      "https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json": [
+        "azure-pipelines.yml",
+        "azure-pipelines.yaml",
+        ".azure-pipelines.yml",
+        ".azure-pipelines.yaml",
+        ".azure-pipelines/**/*.yml",
+        ".azure-pipelines/**/*.yaml"
+      ],
+      "https://raw.githubusercontent.com/buildkite/pipeline-schema/main/schema.json": [
+        "buildkite.yml",
+        "buildkite.yaml",
+        "buildkite.*.yml",
+        "buildkite.*.yaml",
+        ".buildkite/pipeline.yml",
+        ".buildkite/pipeline.yaml",
+        ".buildkite/pipeline.*.yml",
+        ".buildkite/pipeline.*.yaml"
+      ],
+      "https://goreleaser.com/static/schema.json": [
+        ".goreleaser.yml",
+        ".goreleaser.yaml"
+      ],
+      "https://json.schemastore.org/mkdocs-1.6.json": [
+        "mkdocs.yml",
+        "mkdocs.yaml"
+      ]
+    },
+    "validate": true,
+    "hover": true,
+    "completion": true,
+    "format": { "enable": false }
+  }
+}

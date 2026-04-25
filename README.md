@@ -4,6 +4,78 @@
 
 <img width="809" height="256" alt="GitHub Actions Workflow - Zed Screenshot with Syntax Highlighting " src="https://github.com/user-attachments/assets/fcb18b20-8b10-47ca-bac2-e6695e485877" />
 
+Features of this extension
+
+- Advanced `GitHub Workflow` YAML syntax highlighting (`${{ }}` and `run:` blocks).
+- Schema definitions for 9 GitHub YAML configuration file formats
+  - GitHub Workflow, Action, Funding, Dependabot, Release, Issues, etc
+- Adds schema definitions for 12+ common YAML/JSON configuration file formats
+  - `prettierrc`, `gitlab-ci.yml`, `renovate.json`, `vercel.json`, etc.
+
+## Installation
+
+Open `zed: extensions` from the command palette in Zed and search for `GitHub YAML`,
+
+Or clone this repository and spawn `zed: install dev extension`.
+
+## Required Settings
+
+You must associate `GitHub Workflow` language with the appropriate globs:
+
+1. Open Zed command palette (`cmd-shift-p` / `ctrl-shift-p`)
+1. Spawn `zed::OpenSettingsFile`
+1. Add the following to your Zed `settings.json`
+
+```jsonc
+{
+  "file_types": {
+    "GitHub Workflow": [
+      "**/.github/workflows/*.{yml,yaml}",
+      "**/.github/actions/**/action.{yml,yaml}",
+    ],
+  },
+}
+```
+
+## Git Firefly Extension
+
+I also recommend the excellent [Git Firefly extension](https://github.com/zed-extensions/git_firefly)
+which provides Zed languages for `.gitattributes`, `.gitconfig,`, `.gitignore`, etc.
+
+Don't forget to add it's `file_types` associations as well:
+
+```json
+{
+  "file_types": {
+    // Git Firefly extension
+    "Git Attributes": ["**/{git,.git,.git/info}/attributes"],
+    "Git Config": ["*.gitconfig", "**/{git,.git/modules,.git/modules/*}/config"],
+    "Git Ignore": ["**/{git,.git}/ignore", "**/.git/info/exclude"]
+  }
+}
+```
+
+### Alternatives
+
+> [!NOTE]
+> Consider adding explicit `# $schema=` directives to the top of your YAML files and
+> `"$schema": ""` in your JSON files so your editor can automatically validate schemas
+> without requiring configuration like that provided by this extension.
+
+For a GitHub Actions Workflow file use:
+
+```yaml
+# $schema=https://json.schemastore.org/github-workflow.json
+```
+
+Or in a `vercel.json`:
+
+```json
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json"
+}
+```
+
 ## Features
 
 - Adds `GitHub Workflow` language:
@@ -12,7 +84,7 @@
   - injection of [tree-sitter-bash](https://github.com/tree-sitter/tree-sitter-bash) for `run:` blocks
   - injection of [tree-sitter-javascript](https://github.com/tree-sitter/tree-sitter-javascript) for [actions/github-script](https://github.com/actions/github-script) `script:` blocks
   - injection of [tree-sitter-nim-format-string](https://github.com/aMOPel/tree-sitter-nim-format-string) for format placeholders: `${{ format('hi {0}', 'Bob') }}`
-- JSON Schemas with `yaml-language-server` to support auto-complete, validation and hover docs for:
+- JSON Schema settings to support auto-complete, validation and hover docs for:
   - [GitHub Workflow](https://json.schemastore.org/github-workflow.json): `.github/workflows/*.{yml,yaml}`
   - [GitHub Action](https://json.schemastore.org/github-action.json): `.github/actions/**/action.{yml,yaml}`
   - [GitHub Funding](https://json.schemastore.org/github-funding.json): `.github/FUNDING.yml`
@@ -36,99 +108,23 @@
   - [Prettier](https://json.schemastore.org/prettierrc.json): `.prettierrc`, `.prettierrc.{json,yml,yaml}`
   - [Biome](https://biomejs.dev/schemas/latest/schema.json): `biome.{json,jsonc}`
 
-## Installation
+### LSP settings
 
-Open `zed: extensions` from the command palette in Zed and search for `GitHub YAML`,
+The extension registers its own `yaml-language-server` instance under the LSP name
+`github-yaml-language-server`. This is only used for the `GitHub Workflows` language.
 
-Or click  this link [zed://extension/github-yaml](zed://extension/github-yaml)
+The schema associations are injected as language server settings and can be found here:
 
-Or clone this repository and using `zed: install dev extension`.
-
-## Required Settings
-
-To take advantage of the improvements of the `GitHub Workflow` over plain
-YAML we need to add some configuration to your Zed settings.json.
-
-To associate `GitHub Workflow` language with your files add the following to your
-Zed `settings.json` by launching  `zed: open settings file` from the command palette.
-
-```jsonc
-{
-  "file_types": {
-    "GitHub Workflow": [
-      "**/.github/workflows/*.{yml,yaml}",
-      "**/.github/actions/**/action.{yml,yaml}",
-    ],
-  },
-}
-```
-
-## Recommended Companion Extension
-
-I also recommend the [Git Firefly extension](https://github.com/zed-extensions/git_firefly)
-which provides tree-sitters for the following:
-
-- Git Attributes: .gitattributes, .git/info/attributes, etc
-- Git Config: .gitconfig, .gitmodules, .lfsconfig, config.worktree
-- Git Ignore: .gitignore, .dockerignore, .npmignore, .prettierignore, etc
-- Git Rebase: git-rebase-todo
-
-Click here: [zed://extension/git-firefly](zed://extension/git-firefly) to install and then add the following settings:
-
-```json
-{
-  "file_types": {
-    // Git Firefly extension languages
-    "Git Attributes": ["**/{git,.git,.git/info}/attributes"],
-    "Git Config": ["*.gitconfig", "**/{git,.git/modules,.git/modules/*}/config"],
-    "Git Ignore": ["**/{git,.git}/ignore", "**/.git/info/exclude"],
-  }
-}
-```
-
-### Alternatives
-
-Note: It may be helpful to add `# yaml-language-server: $schema=` directives to the top of your files.
-With this, editors configured with `yaml-language-server` (Zed, NeoVim, VSCode, etc) will also
-get automatic schema association with schemas from [JSON SchemaStore](https://schemastore.org).
-Make sure to substitue the correct Schema type for the file in question from the list above.
-
-E.g. For a GitHub Actions Workflow file, `**/.github/workflows/*.yml` use:
-
-```yaml
-# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
-```
-
-### yaml-language-server settings
-
-The extension registers its own `yaml-language-server` instance under the LSP name `github-yaml-language-server`.
+- [schemas/yaml-language-server.json](schemas/yaml-language-server.json)
+- [schemas/json-language-server.json](schemas/json-language-server.json)
+- [schemas/github-yaml-language-server.json](schemas/github-yaml-language-server.json)
 
 User settings are deep-merged on top of the bundled defaults, so you can add your own
-schemas or disable features without losing the bundled GitHub Actions schemas.
-
-For example:
-```json
-{
-  "lsp": {
-    "github-yaml-language-server": {
-      "settings": {
-        "yaml": {
-          "schemas": {
-            "https://json.schemastore.org/whatever.json": [
-              "whatever/*.yml",
-            ]
-          },
-          "format": { "enable": true }
-        }
-      }
-    }
-  }
-}
-```
+schemas or disable features without losing the bundled schemas.
 
 See [Zed YAML Language Docs](https://zed.dev/docs/languages/yaml) and
 [yaml-language-server settings docs](https://github.com/redhat-developer/yaml-language-server?tab=readme-ov-file#language-server-settings)
-for supported settings.
+for more.
 
 ## License
 
